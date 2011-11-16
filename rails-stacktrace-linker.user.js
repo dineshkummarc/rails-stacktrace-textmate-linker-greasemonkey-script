@@ -34,7 +34,6 @@ if (nodes = document.getElementById("traces") && document.querySelectorAll("#tra
       for (var j=0, line; line = lines[j]; j++) {
         var parts       = line.split(":in "),
             pathAndLine = parts[0].split(":");
-            console.log(parts)
         newHtml.push("<a href='txmt://open?url=file://", railsRoot, "/",pathAndLine[0], "&amp;line=", pathAndLine[1], "&amp;column=1'>", line, "</a>\n");
       }
       node.innerHTML = newHtml.join("");
