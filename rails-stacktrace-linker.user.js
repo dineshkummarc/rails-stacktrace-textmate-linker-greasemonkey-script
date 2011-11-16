@@ -26,14 +26,16 @@
 // ==/UserScript==
 
 if (nodes = document.getElementById("traces") && document.querySelectorAll("#traces pre>code")) {
+  var railsRoot = document.querySelectorAll("body p>code")[0].innerText.split(':')[1].replace(/(^\s*)|(\s*$)/g, '');
   for (var i=0, node; node = nodes[i++];) {
     if (node.innerHTML.length > 0) {
       var newHtml = [],
           lines = node.innerHTML.split(/\n/);
       for (var j=0, line; line = lines[j]; j++) {
         var parts       = line.split(":in "),
-            pathAndLine = parts[0].split(":");    
-        newHtml.push("<a href='txmt://open?url=file://", pathAndLine[0], "&amp;line=", pathAndLine[1], "&amp;column=1'>", line, "</a>\n");
+            pathAndLine = parts[0].split(":");
+            console.log(parts)
+        newHtml.push("<a href='txmt://open?url=file://", railsRoot, pathAndLine[0], "&amp;line=", pathAndLine[1], "&amp;column=1'>", line, "</a>\n");
       }
       node.innerHTML = newHtml.join("");
     }
